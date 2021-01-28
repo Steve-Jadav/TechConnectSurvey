@@ -14,7 +14,7 @@ var json = {
             questions: [
                 {
                     type: "html",
-                    html: "You are about to start this survey. <br/>We ensure that your answers will remain highly confidential.<br/>Please click on <b>'Start Survey'</b> button when you are ready."
+                    html: "You are about to start this survey. <br/>We ensure that your responses will remain highly confidential.<br/>Please click on <b>'Start Survey'</b> button when you are ready."
                 }
             ]
         }, {
