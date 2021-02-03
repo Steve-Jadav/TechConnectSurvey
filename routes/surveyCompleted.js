@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const surveyEmailResponseFile = "public/email.html";
 
-var transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "stevejadav1998@gmail.com",
@@ -12,7 +12,7 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-var htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, </p> </br>" +
+let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, </p> </br>" +
 "You're invited by xyz to fill out this survey. Here's the <a href='http://localhost:3000/'>link</a> to the survey.</body></html>";
 
 router.post("/", function(req, res, next) {

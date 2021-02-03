@@ -1,8 +1,8 @@
-
 Survey
     .StylesManager
     .applyTheme("bootstrap");
 Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
+Survey.settings.lazyRowsRendering = true;
 
 var json = {
     title: "TechBridge Survey",
@@ -28,6 +28,16 @@ var json = {
                     validators: [
                       { type: "email" }
                     ]
+               },
+               {
+                   type: "radiogroup",
+                   name: "civilwar",
+                   isRequired: false,
+                   title: "In what way do you most frequently communicate?",
+                   choices: [
+                       "Trouble Calls", "Email", "Respective Department", "In-person Direct Contact"
+                   ],
+                   correctAnswer: "1850-1900"
                }
             ]
         }, {
