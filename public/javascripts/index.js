@@ -1,6 +1,7 @@
 Survey
     .StylesManager
     .applyTheme("bootstrap");
+
 Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
 Survey.settings.lazyRowsRendering = true;
 
@@ -23,6 +24,26 @@ var json = {
                     name: "email",
                     type: "text",
                     title: "Please enter your organization affiliated email:",
+                    placeHolder: "john.doe@xyz.org",
+                    isRequired: true,
+                    validators: [
+                      { type: "email" }
+                    ]
+               },
+               {
+                    name: "email2",
+                    type: "text",
+                    title: "Enter the email of person you're mostly likely to work with:",
+                    placeHolder: "john.doe@xyz.org",
+                    isRequired: true,
+                    validators: [
+                      { type: "email" }
+                    ]
+               },
+               {
+                    name: "email3",
+                    type: "text",
+                    title: "Enter the email of person you're mostly likely to work with:",
                     placeHolder: "john.doe@xyz.org",
                     isRequired: true,
                     validators: [
@@ -69,7 +90,7 @@ var json = {
                     type: "dropdown",
                     name: "car",
                     title: "How frequently do you contact a different department/divison/shop in a given day and week?",
-                    isRequired: true,
+                    isRequired: false,
                     colCount: 0,
                     choices: [
                         "0",
@@ -85,7 +106,7 @@ var json = {
                 {
                     type: "radiogroup",
                     name: "libertyordeath",
-                    isRequired: true,
+                    isRequired: false,
                     title: "Whom do you normally contact?",
                     choicesOrder: "random",
                     choices: [
@@ -99,7 +120,7 @@ var json = {
                 {
                     type: "checkbox",
                     name: "departments",
-                    isRequired: true,
+                    isRequired: false,
                     title: "Which departments do you contact?",
                     hasNone: true,
                     colCount: 5,
@@ -130,10 +151,12 @@ survey
           console.log("Failed!");
         });
 
+        /*
         document
             .querySelector('#surveyResult')
             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+        */
 
     });
 
-$("#surveyElement").Survey({model: survey});
+$("#surveyElement").Survey({ model: survey });

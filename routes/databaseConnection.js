@@ -1,8 +1,5 @@
-const express = require("express");
 const neo4j = require("neo4j-driver");
-const router = express.Router();
-
-const URI = "bolt://localhost:7687";
+const CONNECTION_URI = "bolt://localhost:7687";
 const credentials = {
   "neo4j": {
     "user": "neo4j",
@@ -11,38 +8,55 @@ const credentials = {
 };
 
 let driver = neo4j.driver(
-  URI,
+  CONNECTION_URI,
   neo4j.auth.basic(credentials.neo4j.user, credentials.neo4j.password)
 );
 
 let session = driver.session();
 
-router.get("/", function(req, res) {
-  let cypher = "MATCH (n:Researcher) RETURN n LIMIT 25";
-  let nodeCreationCypher = "CREATE (n:Researcher { name: $name, title: $title }) RETURN n";
-  insertRecords(nodeCreationCypher, "", "", "");
-  /*fetchRecords(cypher)
-    .then(result => {
-      res.send(result);
-    }); */
-});
-
 /**
-* @param {String} cypher
 * @param {String} nodeType
 * @param {String} nodeTitle
-* @param {String} nodeEmail
+* @param {String} rootNode
+* @param {Array} childNodes
 */
-async function insertRecords(cypher, nodeType, nodeTitle, nodeEmail) {
+async function insertRecords(nodeType, nodeTitle, rootNode, childNodes) {
+
+  let flag = Boolean(false);
+
   try {
-    const result = await session.run(
-      cypher,
-      { name: "Ralph", title: "Researcher at NW TechBridge" }
-    );
+    // First check if the root node already exists in the database.
+    let match = "MATCH (n:" + nodeType + " { name: $name }) RETURN n";
+    let present = await session.run(match, { name: rootNode });
+
+    if (present.records.length == 0) {
+      let cypher = "CREATE (n:" + nodeType + " { name: $name, title: $title, email: $email }) RETURN n";
+
+      let result = await session.run(
+        cypher,
+        { name: rootNode, title: nodeTitle, email: rootNode }
+      );
+      console.log("Created the root node!");
+    }
+
+    // Enter the child nodes and connect them with the root node
+    for (const c of childNodes) {
+      let cypher = "CREATE (n:" + nodeType + " { name: $name, title: $title, email: $email }) RETURN n";
+      let result = await session.run(
+        cypher,
+        { name: c, title: nodeTitle, email: c }
+      );
+
+      let relationshipCypher = "MATCH (a:" + nodeType + "), (b:" + nodeType + ") WHERE a.name='" + rootNode + "' AND b.name='" + c + "' CREATE (a)-[r:WORKSWITH]->(b) RETURN type(r)";
+      result = await session.run(relationshipCypher);
+    }
+
+    flag = Boolean(true);
   }
   finally {
-
+    return flag;
   }
+
 }
 
 
@@ -65,4 +79,4 @@ async function fetchRecords(cypher) {
   return nodes;
 }
 
-module.exports = router;
+module.exports = { insertRecords, fetchRecords };
