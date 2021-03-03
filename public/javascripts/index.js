@@ -179,6 +179,32 @@ survey
 $("#surveyElement").Survey({ model: survey });
 */
 
-function updateTextInput(val) {
-    $(".badge").text(val);
+let contactCounts = [0, 0, 0, 0, 0];
+
+function updateTextInput(val, index) {
+    $(".badge-" + index.toString()).text(val);
+}
+
+function addContact(index) {
+  contactCounts[index] += 1;
+
+  if (contactCounts[index] >= 10) {
+    $("#addContact-" + index.toString()).disabled = true;
+  }
+  else {
+    let row = "<div class='row'>" +
+    "<div class='col-md-4'> " +
+      "<input type='text' class='form-control' placeholder='Name'> " +
+    "</div> " +
+     "<div class='col-md-6'> " +
+          "<select id='inputState' class='form-control'>" +
+            "<option selected>Choose Relationship...</option>" +
+            "<option>Local Tech Bridge</option>" +
+            "<option>Outreach Events</option>" +
+          "</select>" +
+      "</div>" +
+    "</div>";
+
+    $("#section-2-form-" + index.toString()).append(row);
+  }
 }
