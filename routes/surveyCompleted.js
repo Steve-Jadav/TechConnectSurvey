@@ -19,10 +19,25 @@ let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, <
 router.post("/", function(req, res, next) {
 
   console.log(req.body);
+
+  /* Roster insert
+  let parentNode = req.body.email;
+  let childNode = req.body.email2;
+  let relationship = req.body.relationship;
+
+  databaseOperations.rosterInsert(parentNode, childNode, relationship)
+                    .then(result => {
+                      if (result === true) console.log("Connection created successfully!");
+                      else console.log("An error occured while inserting records to Neo4j.");
+                    })
+                    .catch(error => {
+                      console.log(error);
+                    }); */
+
   let rootNode = req.body.email;
   let childNodes = new Array(req.body.email2, req.body.email3);
 
-  databaseOperations.insertRecords("Researcher", "Ron", rootNode, childNodes)
+  databaseOperations.insertRecords("Researcher", "Researcher", rootNode, childNodes)
                     .then(result => {
                       if (result === true)
                         console.log("Record inserted successfully.");
@@ -32,6 +47,7 @@ router.post("/", function(req, res, next) {
                     .catch(error => {
                       console.log(error);
                     });
+
 
   /* Sending an email =>
   let htmlData = fs.readFileSync(surveyEmailResponseFile, "utf-8");

@@ -14,6 +14,8 @@ let driver = neo4j.driver(
 
 let session = driver.session();
 
+/* +++++++++=+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
 /**
 * @param {String} nodeType
 * @param {String} nodeTitle
@@ -41,13 +43,13 @@ async function insertRecords(nodeType, nodeTitle, rootNode, childNodes) {
 
     // Enter the child nodes and connect them with the root node
     for (const c of childNodes) {
-      let cypher = "CREATE (n:" + nodeType + " { name: $name, title: $title, email: $email }) RETURN n";
+      let cypher = "CREATE (n: ServiceProvider { name: $name, title: $title, email: $email }) RETURN n";
       let result = await session.run(
         cypher,
         { name: c, title: nodeTitle, email: c }
       );
 
-      let relationshipCypher = "MATCH (a:" + nodeType + "), (b:" + nodeType + ") WHERE a.name='" + rootNode + "' AND b.name='" + c + "' CREATE (a)-[r:WORKSWITH]->(b) RETURN type(r)";
+      let relationshipCypher = "MATCH (a:" + nodeType + "), (b: ServiceProvider) WHERE a.name='" + rootNode + "' AND b.name='" + c + "' CREATE (a)-[r:WORKSWITH]->(b) RETURN type(r)";
       result = await session.run(relationshipCypher);
     }
 
@@ -79,4 +81,55 @@ async function fetchRecords(cypher) {
   return nodes;
 }
 
-module.exports = { insertRecords, fetchRecords };
+
+/**
+* @param {String} parentNode
+* @param {String} childNode
+* @param {String} relationshipType
+*/
+async function rosterInsert(parentNode, childNode, relationshipType) {
+  let flag = Boolean(false);
+
+  try {
+    // First check if the root node already exists in the database.
+    let match = "MATCH (n: Researcher { email: $email }) RETURN n";
+    console.log(match);
+    let present = await session.run(match, { email: parentNode });
+    console.log(present);
+    if (present.records.length == 0) {
+      let cypher = "CREATE (n: Researcher { name: $name, title: $title, email: $email }) RETURN n";
+
+      let result = await session.run(
+        cypher,
+        { name: "Ralph", title: parentNode, email: parentNode }
+      );
+      console.log("Created the parent node!");
+    }
+
+    // Check if the child node exists in the database
+    match = "MATCH (n: ServiceProvider { email: $email }) RETURN n";
+    present = await session.run(match, { email: childNode });
+
+    if (present.records.length == 0) {
+      cypher = "CREATE (n: ServiceProvider { name: $name, title: $title, email: $email }) RETURN n";
+
+      result = await session.run(
+        cypher,
+        { name: "Steve", title: childNode, email: childNode }
+      );
+      console.log("Created the parent node!");
+    }
+
+      // Connect both the nodes
+      let relationshipCypher = "MATCH (a: Researcher), (b: ServiceProvider) WHERE a.name='Ralph' AND b.name='Steve' CREATE (a)-[r:WORKSWITH { type: $type } ]->(b) RETURN type(r)";
+      result = await session.run(relationshipCypher, { type: relationshipType });
+      flag = Boolean(true);
+    }
+
+  finally {
+    return flag;
+  }
+}
+
+/* Export required functions */
+module.exports = { insertRecords, fetchRecords, rosterInsert };

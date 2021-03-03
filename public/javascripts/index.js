@@ -1,4 +1,4 @@
-Survey
+/* Survey
     .StylesManager
     .applyTheme("bootstrap");
 
@@ -19,40 +19,57 @@ var json = {
                 }
             ]
         }, {
+            title: "Introduction",
             questions: [
+                {
+                    type: "html",
+                    html: "  The purpose of this study is to examine the impact of NavalX Tech Bridges on their regional business and technology ecosystems. One way to accomplish this goal is to understand professional relationships among persons and organizations in professional circles linked to Tech Bridges. This survey will help create a map of people who work together across their respective organizations. Please make sure you have read and signed the Letter for Informed Consent before continuing with this form.   For the purposes of the questions below, any questions that reference your organization are asking about your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.   As mentioned in the Informed Consent letter, any identifying information on this form will not be associated with your responses to Section 3: Perceptions of your local Tech Bridge. "
+                },
                {
-                    name: "email",
+                    name: "firstName",
                     type: "text",
-                    title: "Please enter your organization affiliated email:",
-                    placeHolder: "john.doe@xyz.org",
-                    isRequired: true,
+                    title: "First Name:",
+                    isRequired: false,
+                    maxWidth: "200px",
                     validators: [
                       { type: "email" }
                     ]
                },
                {
-                    name: "email2",
+                    name: "lastName",
                     type: "text",
-                    title: "Enter the email of person you're mostly likely to work with:",
-                    placeHolder: "john.doe@xyz.org",
-                    isRequired: true,
-                    validators: [
-                      { type: "email" }
-                    ]
+                    title: "Last Name:",
+                    isRequired: false,
+                    maxWidth: "200px",
+               },
+               {
+                    name: "jobTitle",
+                    type: "text",
+                    title: "Job Title:",
+                    isRequired: false,
+                    maxWidth: "200px",
+               },
+               {
+                    name: "specialityAreas",
+                    type: "text",
+                    title: "Please list your specialty areas or your areas of capacity (e.g. additive manufacturing, artificial intelligence, fuels chemistry, underwater basket weaving, etc.)",
+                    placeholder: "Artificial Intelligence, Fuels Chemistry, Additive Manufacturing",
+                    isRequired: false,
+                    maxWidth: "initial",
                },
                {
                     name: "email3",
                     type: "text",
                     title: "Enter the email of person you're mostly likely to work with:",
                     placeHolder: "john.doe@xyz.org",
-                    isRequired: true,
+                    isRequired: false,
                     validators: [
                       { type: "email" }
                     ]
                },
                {
                    type: "radiogroup",
-                   name: "civilwar",
+                   name: "relationship",
                    isRequired: false,
                    title: "In what way do you most frequently communicate?",
                    choices: [
@@ -61,7 +78,7 @@ var json = {
                    correctAnswer: "1850-1900"
                }
             ]
-        }, {
+        } , {
             questions: [
                 {
                     type: "radiogroup",
@@ -151,12 +168,17 @@ survey
           console.log("Failed!");
         });
 
-        /*
+
         document
             .querySelector('#surveyResult')
             .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-        */
+
 
     });
 
 $("#surveyElement").Survey({ model: survey });
+*/
+
+function updateTextInput(val) {
+    $(".badge").text(val);
+}

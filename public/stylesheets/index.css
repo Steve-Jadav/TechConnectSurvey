@@ -1,4 +1,4 @@
-.btn {
+/*.btn {
   background: #25C28E;
   color: white;
 }
@@ -7,3 +7,44 @@
   color: white;
   opacity: 0.9;
 }
+*/
+
+::-webkit-input-placeholder {
+   font-size: 0.9em !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+      font-size: 0.9em !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+      font-size: 0.9em !important;
+}
+
+input {
+  margin-top: 0.5rem;
+  border-radius: 10px !important;
+}
+
+table {
+  margin-top: 0.5rem;
+}
+
+.card {
+  box-shadow: 3px 3px 10px grey;
+}
+
+.likert { text-align:center; }
+.likert td { width: 70px; }
+
+/*
+input[type=range]::-webkit-slider-thumb {
+    background: red;
+}
+input[type=range]::-moz-range-thumb {
+    background: red;
+}
+input[type=range]::-ms-thumb {
+    background: red;
+}
+*/
