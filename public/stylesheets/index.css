@@ -1,15 +1,24 @@
-/*.btn {
-  background: #25C28E;
-  color: white;
+/*
+button {
+  background: #900C3F !important;
+  border-color: #900C3F !important;
 }
 
 .btn:hover {
   color: white;
   opacity: 0.9;
+  FFD800
+  EBF7F4
 }
 */
 
-::-webkit-input-placeholder {
+body {
+  font-family: Tahoma, sans-serif !important;
+  font-size: 0.9rem !important;
+  background: #EBF7F4 !important;
+}
+
+::-webkit-input-placeholder, select {
    font-size: 0.9em !important;
 }
 
@@ -37,6 +46,9 @@ table {
 .likert { text-align:center; }
 .likert td { width: 70px; }
 
+.popover{
+    max-width: 50% !important; /* Max Width of the popover (depending on the container!) */
+}
 /*
 input[type=range]::-webkit-slider-thumb {
     background: red;

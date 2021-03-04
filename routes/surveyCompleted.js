@@ -16,9 +16,9 @@ let transporter = nodemailer.createTransport({
 let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, </p> </br>" +
 "You're invited by xyz to fill out this survey. Here's the <a href='http://localhost:3000/'>link</a> to the survey.</body></html>";
 
-router.post("/", function(req, res, next) {
+router.put("/", function(req, res, next) {
 
-  console.log(req.body);
+  console.log(req.body );
 
   /* Roster insert
   let parentNode = req.body.email;
@@ -34,6 +34,7 @@ router.post("/", function(req, res, next) {
                       console.log(error);
                     }); */
 
+  /*
   let rootNode = req.body.email;
   let childNodes = new Array(req.body.email2, req.body.email3);
 
@@ -47,7 +48,7 @@ router.post("/", function(req, res, next) {
                     .catch(error => {
                       console.log(error);
                     });
-
+                    */
 
   /* Sending an email =>
   let htmlData = fs.readFileSync(surveyEmailResponseFile, "utf-8");

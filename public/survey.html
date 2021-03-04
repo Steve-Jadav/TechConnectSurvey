@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <title>TechBridge Survey</title>
+    <meta charset="utf-8">
+    <meta name="author" content="The Unit for Data Science and Analytics - Arizona State University">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../stylesheets/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+
+  </head>
+
+  <body>
+
+    <br>
+    <center>
+
+        <!-- Section 1 of the survey -->
+        <div class="card border-dark" style="width: 60%;">
+
+            <div class="card-body">
+              <h4 class="card-title">Introduction</h4>
+              <hr>
+              <!--
+              <p class="card-text" style="font-size: 0.9em;">
+                The purpose of this study is to examine the impact of NavalX Tech Bridges on their regional business and technology ecosystems. One way to accomplish this goal is to understand professional relationships among persons and organizations in professional circles linked to Tech Bridges. This survey will help create a map of people who work together across their respective organizations. Please make sure you have read and signed the Letter for Informed Consent before continuing with this form.
+                For the purposes of the questions below, any questions that reference your "organization" are asking about your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.
+                As mentioned in the Informed Consent letter, any identifying information on this form will not be associated with your responses to Section 3: Perceptions of your local Tech Bridge.
+              </p> -->
+              <p>
+              <button class="btn btn-dark btn-sm" type="button" id="collapse_show" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample" show>
+                  Learn more (type1) click to toggle
+              </button>
+              </p>
+
+              <div class="collapse show" id="collapseExample">
+                <div class="card card-body" style="box-shadow: 0px 0px 0px;">
+                    The purpose of this study is to examine the impact of NavalX Tech Bridges on their regional business and technology ecosystems. One way to accomplish this goal is to understand professional relationships among persons and organizations in professional circles linked to Tech Bridges. This survey will help create a map of people who work together across their respective organizations. Please make sure you have read and signed the Letter for Informed Consent before continuing with this form. For the purposes of the questions below, any questions that reference your 'organization' are asking about your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.
+                    As mentioned in the Informed Consent letter, any identifying information on this form will not be associated with your responses to Section 3: Perceptions of your local Tech Bridge.
+                </div>
+             </div>
+
+             <br>
+
+              <button type="button" class="btn btn-dark btn-sm" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="The purpose of this study is to examine the impact of NavalX Tech Bridges on their regional business and technology ecosystems. One way to accomplish this goal is to understand professional relationships among persons and organizations in professional circles linked to Tech Bridges. This survey will help create a map of people who work together across their respective organizations. Please make sure you have read and signed the Letter for Informed Consent before continuing with this form.
+              For the purposes of the questions below, any questions that reference your 'organization' are asking about your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.
+              As mentioned in the Informed Consent letter, any identifying information on this form will not be associated with your responses to Section 3: Perceptions of your local Tech Bridge.">
+                  Learn more (type2) popover button
+              </button>
+
+              <br>
+              <br>
+              <form style="width: 55%;">
+
+                <div class="form-group">
+                  <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Please list your specialty areas or your areas of capacity. </label>
+                  <input type="text" class="form-control" id="specialityAreas" placeholder="Fuels Chemistry, Artificial Intelligence, Additive Manufacturing">
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Company Name</label>
+                  <input type="text" class="form-control" id="companyName" placeholder="">
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">When did you join your organization (Month/Year)?</label>
+                  <input type="text" class="form-control" id="joiningDate" placeholder="mm/yyyy">
+                </div>
+                <br>
+
+                <label> Is this organization a Tech Bridge? </label>
+                <br>
+                <br>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="techBridge">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    No
+                  </label>
+                </div>
+                <br>
+
+                <label> Select the Primary Role of your Organization. Check all that apply. </label>
+                <br>
+                <br>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Department of Defense (DoD)" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Dept. of Defense (DoD)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Non-DoD Federal Government" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Non-DoD Federal Government
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="State and Local Government" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    State and Local Government
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Academia" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Academia
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Private Sector" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Private Sector
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Nonprofit" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Nonprofit
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="Other" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    Other
+                  </label>
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Approximately how many people work in your organization?</label>
+                  <input type="text" class="form-control" id="noOfPeople" placeholder="Please specify a number">
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Who is your direct supervisor? List all supervisors who directly oversee you, separated by commas.</label>
+                  <input type="text" class="form-control" id="supervisors" placeholder="George Bush, Bill Clinton, etc.">
+                </div>
+                <br>
+
+              </form>
+            </div>
+
+          </div>
+          <!-- END of section 1 -->
+
+          <br>
+          <br>
+
+          <!-- Section 2 of the survey -->
+          <div class="card border-dark" style="width: 60%;">
+              <div class="card-body">
+                <h4 class="card-title"> Ecosystem Mapping for Tech Bridges </h4>
+                <p class="text-justify card-text">The following questions will serve to map out your networks of collaborators across organizations. For the purposes of the questions below, we will be asking about people outside your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.</p>
+                <hr>
+                <h6 class="card-subtitle mb-2 text-muted">Your Network</h6>
+                <p class="text-justify card-text"> In the questions below, you will be asked to detail some of the contacts with whom you work during your day-to-day responsibilities. The term "organization" designates a department (government) or an entire business. </p>
+                <hr>
+
+                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list <b> up to ten (10) </b> people OUTSIDE of your organization with whom you contact daily for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                <br>
+                <br>
+                <form id="section-2-form-1">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Name">
+                      </div>
+
+                      <div class="col-md-6">
+                          <select id="inputState" class="form-control">
+                            <option selected>Choose Relationship Type...</option>
+                            <option>Local Tech Bridge</option>
+                            <option>Outreach Events</option>
+                          </select>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" id="addContact-1" onclick="addContact(1)">Add Contact</button>
+                      </div>
+
+                    </div>
+                </form>
+
+                <hr>
+
+                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact weekly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                <br>
+                <br>
+                <form id="section-2-form-2">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Name">
+                      </div>
+
+                      <div class="col-md-6">
+                          <select id="inputState" class="form-control">
+                            <option selected>Choose Relationship Type...</option>
+                            <option>Local Tech Bridge</option>
+                            <option>Outreach Events</option>
+                          </select>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" id="addContact-2" onclick="addContact(2)">Add Contact</button>
+                      </div>
+
+                    </div>
+                </form>
+
+                <hr>
+
+                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact monthly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                <br>
+                <br>
+                <form id="section-2-form-3">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Name">
+                      </div>
+
+                      <div class="col-md-6">
+                          <select id="inputState" class="form-control">
+                            <option selected>Choose Relationship Type...</option>
+                            <option>Local Tech Bridge</option>
+                            <option>Outreach Events</option>
+                          </select>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" id="addContact-3" onclick="addContact(3)">Add Contact</button>
+                      </div>
+
+                    </div>
+                </form>
+
+                <hr>
+
+                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you have contacted in the past 2-12 months for the purposes of pursuing impactful projects or programs for your work. This would generally mean that they are someone you have worked with consistently in the past year but do not have any current work with them. Please make sure to include their organizational affiliation and department.  Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                <br>
+                <br>
+                <form id="section-2-form-4">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Name">
+                      </div>
+
+                      <div class="col-md-6">
+                          <select id="inputState" class="form-control">
+                            <option selected>Choose Relationship Type...</option>
+                            <option>Local Tech Bridge</option>
+                            <option>Outreach Events</option>
+                          </select>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-sm" id="addContact-4" onclick="addContact(4)">Add Contact</button>
+                      </div>
+
+                    </div>
+                </form>
+
+              </div>
+         </div>
+         <!-- END of section 2 -->
+
+         <br>
+         <br>
+
+         <!-- Section 3 of the survey -->
+         <div class="card border-dark" style="width: 60%;">
+             <div class="card-body">
+               <h4 class="card-title"> Perceptions of your local Tech Bridge </h4>
+               <p class="text-justify card-text"> Please fill out the following section if you have worked with a Tech Bridge in the past, or if you are familiar with Tech Bridges. Otherwise, please leave this section blank. </p>
+               <hr>
+
+               <label> I trust that my local Tech Bridge has a comprehensive view of the regional business and collaboration ecosystem. </label>
+               <table class="likert">
+                 <tr>
+                     <td></td>
+                     <td>1</td>
+                     <td>2</td>
+                     <td>3</td>
+                     <td>4</td>
+                     <td>5</td>
+                     <td>6</td>
+                     <td>7</td>
+                     <td></td>
+                 </tr>
+                 <tr>
+                    <td> Strongly Disagree </td>
+                    <td><input type="radio" name="likert-1" value="1" /></td>
+                    <td><input type="radio" name="likert-1" value="2" /></td>
+                    <td><input type="radio" name="likert-1" value="3" /></td>
+                    <td><input type="radio" name="likert-1" value="4" /></td>
+                    <td><input type="radio" name="likert-1" value="5" /></td>
+                    <td><input type="radio" name="likert-1" value="6" /></td>
+                    <td><input type="radio" name="likert-1" value="7" /></td>
+                    <td> Strongly Agree </td>
+                </tr>
+               </table>
+
+              <br>
+              <br>
+
+              <label> I trust the recommendations of my local Tech Bridge when it comes to finding new and productive collaborators. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-2" value="1" /></td>
+                   <td><input type="radio" name="likert-2" value="2" /></td>
+                   <td><input type="radio" name="likert-2" value="3" /></td>
+                   <td><input type="radio" name="likert-2" value="4" /></td>
+                   <td><input type="radio" name="likert-2" value="5" /></td>
+                   <td><input type="radio" name="likert-2" value="6" /></td>
+                   <td><input type="radio" name="likert-2" value="7" /></td>
+                     <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label> I feel very confident about the skills of my local Tech Bridge. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-3" value="1" /></td>
+                   <td><input type="radio" name="likert-3" value="2" /></td>
+                   <td><input type="radio" name="likert-3" value="3" /></td>
+                   <td><input type="radio" name="likert-3" value="4" /></td>
+                   <td><input type="radio" name="likert-3" value="5" /></td>
+                   <td><input type="radio" name="likert-3" value="6" /></td>
+                   <td><input type="radio" name="likert-3" value="7" /></td>
+                     <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label> My local Tech Bridge is known to be successful at the things it tries to do. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-4" value="1" /></td>
+                   <td><input type="radio" name="likert-4" value="2" /></td>
+                   <td><input type="radio" name="likert-4" value="3" /></td>
+                   <td><input type="radio" name="likert-4" value="4" /></td>
+                   <td><input type="radio" name="likert-4" value="5" /></td>
+                   <td><input type="radio" name="likert-4" value="6" /></td>
+                   <td><input type="radio" name="likert-4" value="7" /></td>
+                   <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label> Sound principles seem to guide the behavior of my local Tech Bridge. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-5" value="1" /></td>
+                   <td><input type="radio" name="likert-5" value="2" /></td>
+                   <td><input type="radio" name="likert-5" value="3" /></td>
+                   <td><input type="radio" name="likert-5" value="4" /></td>
+                   <td><input type="radio" name="likert-5" value="5" /></td>
+                   <td><input type="radio" name="likert-5" value="6" /></td>
+                   <td><input type="radio" name="likert-5" value="7" /></td>
+                   <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label> My local Tech Bridge wants to be accountable to people like me for its actions. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-6" value="1" /></td>
+                   <td><input type="radio" name="likert-6" value="2" /></td>
+                   <td><input type="radio" name="likert-6" value="3" /></td>
+                   <td><input type="radio" name="likert-6" value="4" /></td>
+                   <td><input type="radio" name="likert-6" value="5" /></td>
+                   <td><input type="radio" name="likert-6" value="6" /></td>
+                   <td><input type="radio" name="likert-6" value="7" /></td>
+                   <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label> My local Tech Bridge can be relied on to keep its promises. </label>
+              <table class="likert">
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td></td>
+                </tr>
+                <tr>
+                   <td> Strongly Disagree </td>
+                   <td><input type="radio" name="likert-7" value="1" /></td>
+                   <td><input type="radio" name="likert-7" value="2" /></td>
+                   <td><input type="radio" name="likert-7" value="3" /></td>
+                   <td><input type="radio" name="likert-7" value="4" /></td>
+                   <td><input type="radio" name="likert-7" value="5" /></td>
+                   <td><input type="radio" name="likert-7" value="6" /></td>
+                   <td><input type="radio" name="likert-7" value="7" /></td>
+                   <td> Strongly Agree </td>
+               </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label for="customRange3" class="form-label">My local Tech Bridge treats people like me fairly and justly.</label>
+              <br>
+              <table class="likert">
+                <tr>
+                  <td colspan="3"> <h6> <span class="badge badge-pill badge-dark badge-1" style="background: black;"> 4 </span> </h6> </td>
+                </tr>
+                <tr>
+                  <td> Strongly Disagree </td>
+                  <td style="width:78%;"> <input type="range" class="form-range" min="1" max="7" step="1" id="customRange3" onchange="updateTextInput(this.value, 1);"> </td>
+                  <td> Strongly Agree </td>
+                </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label for="customRange3" class="form-label">My local Tech Bridge provides information that is relevant to people like me.</label>
+              <br>
+              <table class="likert">
+                <tr>
+                  <td colspan="3"> <h6> <span class="badge badge-pill badge-dark badge-2" style="background: black;"> 4 </span> </h6> </td>
+                </tr>
+                <tr>
+                  <td> Strongly Disagree </td>
+                  <td style="width:78%;"> <input type="range" class="form-range" min="1" max="7" step="1" id="customRange3" onchange="updateTextInput(this.value, 2);"> </td>
+                  <td> Strongly Agree </td>
+                </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label for="customRange3" class="form-label">My local Tech Bridge wants to understand how its decisions affect people like me.</label>
+              <br>
+              <table class="likert">
+                <tr>
+                  <td colspan="3"> <h6> <span class="badge badge-pill badge-dark badge-3" style="background: black;"> 4 </span> </h6> </td>
+                </tr>
+                <tr>
+                  <td> Strongly Disagree </td>
+                  <td style="width:78%;"> <input type="range" class="form-range" min="1" max="7" step="1" id="customRange3" onchange="updateTextInput(this.value, 3);"> </td>
+                  <td> Strongly Agree </td>
+                </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label for="customRange3" class="form-label">My local Tech Bridge wants people like me to know what it is doing and why it is doing it.</label>
+              <br>
+              <table class="likert">
+                <tr>
+                  <td colspan="3"> <h6> <span class="badge badge-pill badge-dark badge-4" style="background: black;"> 4 </span> </h6> </td>
+                </tr>
+                <tr>
+                  <td> Strongly Disagree </td>
+                  <td style="width:78%;"> <input type="range" class="form-range" min="1" max="7" step="1" id="customRange3" onchange="updateTextInput(this.value, 4);"> </td>
+                  <td> Strongly Agree </td>
+                </tr>
+              </table>
+
+              <br>
+              <br>
+
+              <label for="customRange3" class="form-label">My local Tech Bridge makes it easy to find the information people like me need.</label>
+              <br>
+              <table class="likert">
+                <tr>
+                  <td colspan="3"> <h6> <span class="badge badge-pill badge-dark badge-5" style="background: black;"> 4 </span> </h6> </td>
+                </tr>
+                <tr>
+                  <td> Strongly Disagree </td>
+                  <td style="width:78%;"> <input type="range" class="form-range" min="1" max="7" step="1" id="customRange3" onchange="updateTextInput(this.value, 5);"> </td>
+                  <td> Strongly Agree </td>
+                </tr>
+              </table>
+
+              <br>
+
+            </div>
+         </div>
+
+        <br>
+        <br>
+
+        <button type="button" class="btn btn-primary btn-sm" onclick="submitSurvey()">Submit</button>
+
+        <br>
+        <br>
+
+    </center>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../javascripts/index.js"></script>
+
+  </body>
+
+
+
+</html>

@@ -181,6 +181,12 @@ $("#surveyElement").Survey({ model: survey });
 
 let contactCounts = [0, 0, 0, 0, 0];
 
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+});
+
+
 function updateTextInput(val, index) {
     $(".badge-" + index.toString()).text(val);
 }
@@ -198,7 +204,7 @@ function addContact(index) {
     "</div> " +
      "<div class='col-md-6'> " +
           "<select id='inputState' class='form-control'>" +
-            "<option selected>Choose Relationship...</option>" +
+            "<option selected>Choose Relationship Type...</option>" +
             "<option>Local Tech Bridge</option>" +
             "<option>Outreach Events</option>" +
           "</select>" +
@@ -207,4 +213,37 @@ function addContact(index) {
 
     $("#section-2-form-" + index.toString()).append(row);
   }
+}
+
+function submitSurvey() {
+  let data = new Map();
+  data.set("firstName", $("#firstName").val());
+  data.set("lastName", $("#lastName").val());
+  data.set("jobTitle", $("#jobTitle").val());
+  data.set("specialityAreas", $("#specialityAreas").val());
+  data.set("companyName", $("#companyName").val());
+  data.set("joiningDate", $("#joiningDate").val());
+  data.set("noOfPeople", $("#noOfPeople").val());
+  data.set("supervisors", $("#supervisors").val());
+
+  data.set("scales", new Array());
+
+  for (let i = 1; i <= 7; i++) {
+    data.get("scales").push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
+  }
+
+  console.log(data);
+
+  $.ajax({
+    type: 'PUT',
+    url: '/surveyCompleted',
+    contentType: 'application/json',
+    data: JSON.stringify(data), // access in body
+    }).done(function () {
+        console.log('SUCCESS');
+    }).fail(function (msg) {
+        console.log('FAIL');
+    }).always(function (msg) {
+        console.log('ALWAYS');
+    });
 }
