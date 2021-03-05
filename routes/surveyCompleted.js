@@ -19,8 +19,9 @@ let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, <
 router.post("/", function(req, res, next) {
   console.log("Getting post request.");
   console.log(req.body);
-  res.redirect(303, "/result");
-
+  res.send();
+  //res.redirect("/result");
+  //next();
   /* Roster insert
   let parentNode = req.body.email;
   let childNode = req.body.email2;

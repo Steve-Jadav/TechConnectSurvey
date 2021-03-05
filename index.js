@@ -26,12 +26,18 @@ app.post("/survey", function(req, res) {
 });
 
 app.get("/result", function(req, res) {
-  console.log("Survey taken!");
+
+  if (req.headers.referer == "http://localhost:3000/survey") {
   fs.readFile('public/thankyou.html',function (err, data){
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);
         res.send();
     });
+  }
+  else {
+    res.sendStatus(404);
+  }
+
 });
 
 app.use("/surveyCompleted", surveyCompletedRouter);

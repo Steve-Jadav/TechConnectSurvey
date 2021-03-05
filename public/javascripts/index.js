@@ -179,14 +179,12 @@ survey
 $("#surveyElement").Survey({ model: survey });
 */
 
-
 let contactCounts = [0, 0, 0, 0, 0];
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
 });
-
 
 
 function updateTextInput(val, index) {
@@ -250,3 +248,39 @@ function submitSurvey() {
         console.log('ALWAYS');
     });
 }
+
+$("#form").submit(function(e) {
+
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    let data = {};
+    data["firstName"] = $("#firstName").val();
+    data["lastName"] = $("#lastName").val();
+    data["jobTitle"] = $("#jobTitle").val();
+    data["specialityAreas"] = $("#specialityAreas").val();
+    data["companyName"] = $("#companyName").val();
+    data["joiningDate"] = $("#joiningDate").val();
+    data["noOfPeople"] = $("#noOfPeople").val();
+    data["supervisors"] = $("#supervisors").val();
+    //data["scales"] = new Array();
+
+    /*
+    for (let i = 1; i <= 7; i++) {
+      data.get("scales").push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
+    } */
+
+
+    $.ajax({
+      type: 'POST',
+      url: '/surveyCompleted',
+      contentType: 'application/json',
+      data: JSON.stringify(data), // access in body
+      }).done(function () {
+          console.log('SUCCESS');
+          window.location = "/result";
+      }).fail(function (msg) {
+          console.log('FAIL');
+          return false;
+      });
+
+});
