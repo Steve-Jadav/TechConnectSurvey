@@ -588,8 +588,9 @@
         <br>
         <br>
 
-        <button type="button" class="btn btn-primary btn-sm" onclick="submitSurvey()">Submit</button>
-
+        <form method="POST" onsubmit="submitSurvey()" action="/surveyCompleted">
+          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+       </form>
         <br>
         <br>
 

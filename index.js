@@ -17,11 +17,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
-app.get("/survey", function(req, res) {
+app.post("/survey", function(req, res) {
   fs.readFile('public/survey.html',function (err, data){
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);
-        res.end();
+        res.send();
+    });
+});
+
+app.get("/result", function(req, res) {
+  console.log("Survey taken!");
+  fs.readFile('public/thankyou.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(data);
+        res.send();
     });
 });
 

@@ -16,9 +16,10 @@ let transporter = nodemailer.createTransport({
 let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, </p> </br>" +
 "You're invited by xyz to fill out this survey. Here's the <a href='http://localhost:3000/'>link</a> to the survey.</body></html>";
 
-router.put("/", function(req, res, next) {
-
-  console.log(req.body );
+router.post("/", function(req, res, next) {
+  console.log("Getting post request.");
+  console.log(req.body);
+  res.redirect(303, "/result");
 
   /* Roster insert
   let parentNode = req.body.email;

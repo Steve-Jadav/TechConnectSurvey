@@ -179,12 +179,14 @@ survey
 $("#surveyElement").Survey({ model: survey });
 */
 
+
 let contactCounts = [0, 0, 0, 0, 0];
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
 });
+
 
 
 function updateTextInput(val, index) {
@@ -216,33 +218,34 @@ function addContact(index) {
 }
 
 function submitSurvey() {
-  let data = new Map();
-  data.set("firstName", $("#firstName").val());
-  data.set("lastName", $("#lastName").val());
-  data.set("jobTitle", $("#jobTitle").val());
-  data.set("specialityAreas", $("#specialityAreas").val());
-  data.set("companyName", $("#companyName").val());
-  data.set("joiningDate", $("#joiningDate").val());
-  data.set("noOfPeople", $("#noOfPeople").val());
-  data.set("supervisors", $("#supervisors").val());
+  let data = {};
+  data["firstName"] = $("#firstName").val();
+  data["lastName"] = $("#lastName").val();
+  data["jobTitle"] = $("#jobTitle").val();
+  data["specialityAreas"] = $("#specialityAreas").val();
+  data["companyName"] = $("#companyName").val();
+  data["joiningDate"] = $("#joiningDate").val();
+  data["noOfPeople"] = $("#noOfPeople").val();
+  data["supervisors"] = $("#supervisors").val();
+  //data["scales"] = new Array();
 
-  data.set("scales", new Array());
-
+  /*
   for (let i = 1; i <= 7; i++) {
     data.get("scales").push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
-  }
+  } */
 
-  console.log(data);
 
   $.ajax({
-    type: 'PUT',
+    type: 'POST',
     url: '/surveyCompleted',
     contentType: 'application/json',
     data: JSON.stringify(data), // access in body
     }).done(function () {
         console.log('SUCCESS');
+        return true;
     }).fail(function (msg) {
         console.log('FAIL');
+        return false;
     }).always(function (msg) {
         console.log('ALWAYS');
     });
