@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const fs = require("fs");
+const getUuid = require("uuid-by-string");
 const PORT = 3000;
 
 var http = require("http").createServer(app);
@@ -19,7 +20,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.post("/survey", function(req, res) {
   fs.readFile('public/survey.html',function (err, data){
-        console.log(req.body.username);
+        console.log("Name: ", req.body.username);
+        console.log("uuid: ", getUuid(req.body.username));
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);
         res.send();
