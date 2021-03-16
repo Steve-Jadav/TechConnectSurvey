@@ -26,8 +26,7 @@
               <p class="card-text text-justify">Dear Participant: </p>
 
               <p class="card-text text-justify">
-                My name is Michael Simeone, and I represent a research team at Arizona State University, Tempe Campus. In partnership with the Northwest Tech Bridge, we are conducting a research study to examine what the position of the Tech Bridge is in the regional network of innovators, and what roles it may play. I am requesting your participation, which will involve completing the following survey about your perception of Keyport Tech Bridge as well as asking you to name people with whom you have collaborated recently. Your participation in this study is voluntary. If you choose not to participate or to withdraw from the study at any time, there will be no penalty to your position or compensation. The survey should take no more than 30 minutes.
-
+                My name is Michael Simeone, and I represent a research team at Arizona State University (ASU), Tempe Campus. In partnership with Tech Bridge, we are conducting a research study to examine what the position of the Tech Bridge is in the regional network of innovators, and what roles it may play. I am requesting your participation, which will involve completing the following survey about your perception of a Tech Bridge as well as asking you to name people with whom you have collaborated recently. Your participation in this study is voluntary. If you choose not to participate or to withdraw from the study at any time, there will be no penalty to your position or compensation. The survey should take no more than 30 minutes.
                 The survey will collect identifying information. Namely, your first and last name, as well as your organizational affiliation.  Any responses about your perception of the Tech Bridge will remain anonymous and de-identified, although the Tech Bridge will see your name associated with your position in the broader collaboration network constructed from these surveys.  We will take measures to use encrypted resources to keep the aforementioned personal information safe, although no resource is immune to security breaches. We will also anonymize data before presenting any results or findings. The results of the research study may be published, but your name will not be used. If you have any questions concerning the research study, please call me at 217-377-0850 or e-mail me at msimeone@asu.edu. This research has been approved by the ASU Institutional Review Board (IRB). If you have any questions concerning the ASU IRB policies or procedures or your rights as a human subject, please contact ASU Research Integrity Office at (480) 965-6788 or research.integrity@asu.edu. Return of the questionnaire will be considered your consent to participate.
               </p>
 
@@ -42,7 +41,7 @@
         <b> <p class="card-text text-center" style="font-size:0.9rem;"> I hereby consent to the terms of this study by typing my full name below, which serves as a signature: <p> </b>
           <form action="/survey" method="POST" onsubmit="return submitForm()">
           <div class="form-group">
-            <input type="text" class="form-control" id="participantName" placeholder="Name of Participant" required>
+            <input type="text" name="username" class="form-control" id="participantName" placeholder="Please enter your full name here" required>
           </div>
           <button type="submit" class="btn btn-primary btn-sm" id="surveyButton">Take the survey</a>
           </form>
@@ -53,11 +52,24 @@
     <br></br>
     <br></br>
     <script type="text/javascript">
+      /** This function makes sure that the user doesn't tamper with the required attribute of the input field.
+      ** Even if one removes the required property using the web-inspector, one cannot alter the javascript code which performs the empty string check.
+      */
       function submitForm() {
         let name = document.getElementById("participantName").value;
         if (name == "") return false;
         return true;
       }
+
+      window.history.pushState({page: 1}, "", "");
+
+      window.onpopstate = function(event) {
+        if(event){
+            window.location.href = 'http://localhost:3000/';
+            // Code to handle back button or prevent from navigation
+        }
+      }
+
     </script>
   </body>
 </html>

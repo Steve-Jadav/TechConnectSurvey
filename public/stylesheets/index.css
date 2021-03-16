@@ -18,6 +18,17 @@ body {
   background: #EBF7F4 !important;
 }
 
+input[type=radio], input[type=checkbox] {
+  -ms-transform: scale(1.6); /* IE 9 */
+  -webkit-transform: scale(1.6); /* Chrome, Safari, Opera */
+  transform: scale(1.6);
+}
+
+.radio-button {
+  background: white !important;
+  opacity: 1 !important;
+}
+
 ::-webkit-input-placeholder, select {
    font-size: 0.9em !important;
 }

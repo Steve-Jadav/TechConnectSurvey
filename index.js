@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.post("/survey", function(req, res) {
   fs.readFile('public/survey.html',function (err, data){
+        console.log(req.body.username);
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.write(data);
         res.send();

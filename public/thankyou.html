@@ -22,5 +22,17 @@
         </div>
       </div>
     </center>
+
+    <script type="text/javascript">
+        window.history.pushState({page: 1}, "", "");
+
+        window.onpopstate = function(event) {
+          if(event){
+              window.location.href = 'http://localhost:3000/';
+              // Code to handle back button or prevent from navigation
+          }
+        }
+
+    </script>
   </body>
 </html>
