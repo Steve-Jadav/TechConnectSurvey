@@ -1,185 +1,9 @@
-/* Survey
-    .StylesManager
-    .applyTheme("bootstrap");
+// Hide section-2 and section-3 on document load
+$(".section-2").hide();
+$(".section-3").hide();
+$("#submitButton").hide();
 
-Survey.defaultBootstrapCss.navigationButton = "btn btn-green";
-Survey.settings.lazyRowsRendering = true;
-
-var json = {
-    title: "TechBridge Survey",
-    showProgressBar: "bottom",
-    firstPageIsStarted: true,
-    startSurveyText: "Start Survey",
-    pages: [
-        {
-            questions: [
-                {
-                    type: "html",
-                    html: "You are about to start this survey. <br/>We ensure that your responses will remain highly confidential.<br/>Please click on <b>'Start Survey'</b> button when you are ready."
-                }
-            ]
-        }, {
-            title: "Introduction",
-            questions: [
-                {
-                    type: "html",
-                    html: "  The purpose of this study is to examine the impact of NavalX Tech Bridges on their regional business and technology ecosystems. One way to accomplish this goal is to understand professional relationships among persons and organizations in professional circles linked to Tech Bridges. This survey will help create a map of people who work together across their respective organizations. Please make sure you have read and signed the Letter for Informed Consent before continuing with this form.   For the purposes of the questions below, any questions that reference your organization are asking about your immediate organization. Immediate Organization is defined as everyone who directly reports to the same person.   As mentioned in the Informed Consent letter, any identifying information on this form will not be associated with your responses to Section 3: Perceptions of your local Tech Bridge. "
-                },
-               {
-                    name: "firstName",
-                    type: "text",
-                    title: "First Name:",
-                    isRequired: false,
-                    maxWidth: "200px",
-                    validators: [
-                      { type: "email" }
-                    ]
-               },
-               {
-                    name: "lastName",
-                    type: "text",
-                    title: "Last Name:",
-                    isRequired: false,
-                    maxWidth: "200px",
-               },
-               {
-                    name: "jobTitle",
-                    type: "text",
-                    title: "Job Title:",
-                    isRequired: false,
-                    maxWidth: "200px",
-               },
-               {
-                    name: "specialityAreas",
-                    type: "text",
-                    title: "Please list your specialty areas or your areas of capacity (e.g. additive manufacturing, artificial intelligence, fuels chemistry, underwater basket weaving, etc.)",
-                    placeholder: "Artificial Intelligence, Fuels Chemistry, Additive Manufacturing",
-                    isRequired: false,
-                    maxWidth: "initial",
-               },
-               {
-                    name: "email3",
-                    type: "text",
-                    title: "Enter the email of person you're mostly likely to work with:",
-                    placeHolder: "john.doe@xyz.org",
-                    isRequired: false,
-                    validators: [
-                      { type: "email" }
-                    ]
-               },
-               {
-                   type: "radiogroup",
-                   name: "relationship",
-                   isRequired: false,
-                   title: "In what way do you most frequently communicate?",
-                   choices: [
-                       "Trouble Calls", "Email", "Respective Department", "In-person Direct Contact"
-                   ],
-                   correctAnswer: "1850-1900"
-               }
-            ]
-        } , {
-            questions: [
-                {
-                    type: "radiogroup",
-                    name: "civilwar",
-                    isRequired: false,
-                    title: "In what way do you most frequently communicate?",
-                    choices: [
-                        "Trouble Calls", "Email", "Respective Department", "In-person Direct Contact"
-                    ],
-                    correctAnswer: "1850-1900"
-                }
-            ]
-        }, {
-            questions: [
-                {
-                    type: "rating",
-                    name: "satisfaction",
-                    title: "How satisfied are you with the Product?",
-                    minRateDescription: "Not Satisfied",
-                    maxRateDescription: "Completely satisfied"
-                }
-            ]
-        }, {
-            questions: [
-                {
-                    type: "dropdown",
-                    name: "car",
-                    title: "How frequently do you contact a different department/divison/shop in a given day and week?",
-                    isRequired: false,
-                    colCount: 0,
-                    choices: [
-                        "0",
-                        "Twice",
-                        "Thrice",
-                        "More than 3 times",
-                        "More than 6 times"
-                      ]
-                }
-            ]
-        }, {
-            questions: [
-                {
-                    type: "radiogroup",
-                    name: "libertyordeath",
-                    isRequired: false,
-                    title: "Whom do you normally contact?",
-                    choicesOrder: "random",
-                    choices: [
-                        "Specific Person", "General Department"
-                    ],
-                    correctAnswer: "Patrick Henry"
-                }
-            ]
-        }, {
-            questions: [
-                {
-                    type: "checkbox",
-                    name: "departments",
-                    isRequired: false,
-                    title: "Which departments do you contact?",
-                    hasNone: true,
-                    colCount: 5,
-                    choices: [
-                        "W", "X", "Y", "Z"
-                    ],
-                    correctAnswer: "The foundation of the British parliamentary system"
-                }
-            ]
-        }
-    ],
-    completedHtml: "<h5>Thank you for taking our survey. We appreciate your time!</h5>"
-};
-
-window.survey = new Survey.Model(json);
-
-survey
-    .onComplete
-    .add(function (result) {
-        $.ajax({
-          type: "POST",
-          url: "/surveyCompleted",
-          contentType: 'application/json',
-          data: JSON.stringify(result.data)
-        }).done(function() {
-          console.log("Success!");
-        }).fail(function(msg) {
-          console.log("Failed!");
-        });
-
-
-        document
-            .querySelector('#surveyResult')
-            .textContent = "Result JSON:\n" + JSON.stringify(result.data, null, 3);
-
-
-    });
-
-$("#surveyElement").Survey({ model: survey });
-*/
-
-let contactCounts = [0, 0, 0, 0, 0];
+let contactCounts = [1, 1, 1, 1, 1];
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -192,82 +16,93 @@ function updateTextInput(val, index) {
 }
 
 function addContact(index) {
-  contactCounts[index] += 1;
 
-  if (contactCounts[index] >= 10) {
-    $("#addContact-" + index.toString()).disabled = true;
-  }
-  else {
+  if (contactCounts[index] < 10) {
     let row = "<div class='row'>" +
-    "<div class='col-md-4'> " +
-      "<input type='text' class='form-control' placeholder='Name'> " +
+    "<div class='col-md-3'> " +
+      "<input type='text' class='form-control' placeholder='Full Name'> " +
     "</div> " +
-     "<div class='col-md-6'> " +
+    "<div class='col-md-4'>" +
+      "<input type='text' class='form-control' placeholder='Organization Affiliation, Department'>" +
+    "</div>" +
+     "<div class='col-md-3'> " +
           "<select id='inputState' class='form-control'>" +
             "<option selected>Choose Relationship Type...</option>" +
-            "<option>Local Tech Bridge</option>" +
-            "<option>Outreach Events</option>" +
+            "<option>External Industry Group</option>" +
+            "<option>Within Industry Group</option>" +
           "</select>" +
       "</div>" +
     "</div>";
 
     $("#section-2-form-" + index.toString()).append(row);
   }
+
+  contactCounts[index] += 1;
+  if (contactCounts[index] > 9) {
+    document.getElementById("addContact-" + index.toString()).disabled = true;
+  }
+
 }
 
-function submitSurvey() {
-  let data = {};
-  data["firstName"] = $("#firstName").val();
-  data["lastName"] = $("#lastName").val();
-  data["jobTitle"] = $("#jobTitle").val();
-  data["specialityAreas"] = $("#specialityAreas").val();
-  data["companyName"] = $("#companyName").val();
-  data["joiningDate"] = $("#joiningDate").val();
-  data["noOfPeople"] = $("#noOfPeople").val();
-  data["supervisors"] = $("#supervisors").val();
-  //data["scales"] = new Array();
-
-  /*
-  for (let i = 1; i <= 7; i++) {
-    data.get("scales").push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
-  } */
-
-
-  $.ajax({
-    type: 'POST',
-    url: '/surveyCompleted',
-    contentType: 'application/json',
-    data: JSON.stringify(data), // access in body
-    }).done(function () {
-        console.log('SUCCESS');
-        return true;
-    }).fail(function (msg) {
-        console.log('FAIL');
-        return false;
-    }).always(function (msg) {
-        console.log('ALWAYS');
-    });
-}
 
 $("#form").submit(function(e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.
 
     let data = {};
-    data["firstName"] = $("#firstName").val();
-    data["lastName"] = $("#lastName").val();
-    data["jobTitle"] = $("#jobTitle").val();
-    data["specialityAreas"] = $("#specialityAreas").val();
-    data["companyName"] = $("#companyName").val();
-    data["joiningDate"] = $("#joiningDate").val();
-    data["noOfPeople"] = $("#noOfPeople").val();
-    data["supervisors"] = $("#supervisors").val();
-    //data["scales"] = new Array();
 
-    /*
-    for (let i = 1; i <= 7; i++) {
-      data.get("scales").push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
-    } */
+    // Fetch responses from section 1
+    data["firstName"] = $("#firstName").val().trim();
+    data["lastName"] = $("#lastName").val().trim();
+    data["jobTitle"] = $("#jobTitle").val().trim();
+    data["specialityAreas"] = $("#specialityAreas").val().trim();
+    data["companyName"] = $("#companyName").val().trim();
+    data["joiningDate"] = $("#joiningDate").val().trim();
+    data["techBridge"] = document.querySelector('input[name="techBridgeRadio"]:checked').value;
+    data["organizationRole"] = [];
+    data["noOfPeople"] = $("#noOfPeople").val().trim();
+    data["supervisors"] = $("#supervisors").val().trim();
+    data["section2"] = {
+      "q1": [],
+      "q2": [],
+      "q3": [],
+      "q4": []
+    };
+    data["likertScales"] = new Array();
+
+    // Fetch checkbox checked values
+    let checkedValues = $('input[type="checkbox"]:checked');
+    for (var i = 0; i < checkedValues.length; i++) {
+      data["organizationRole"].push(checkedValues[i].value);
+    }
+
+    // Fetch responses from section 2
+    for (let formId = 1; formId <= 4; formId++) {
+      let formElements =  document.getElementById("section-2-form-" + formId.toString());
+      let l = 0;
+      while (l < formElements.length) {
+          if (l == 3) { l += 1; continue; }
+          let name = formElements[l].value.trim();
+          let org = formElements[l + 1].value.trim();
+          let relationship = formElements[l + 2].value.trim();
+          if (relationship === "Choose Relationship Type...") { relationship = ""; }
+          let packet = { "name": name, "org": org, "relationship": relationship };
+          data["section2"]["q" + formId.toString()].push(packet);
+          l += 3;
+      }
+
+    }
+
+
+    // Fetch the likert scale questions (section 3)
+    for (let i = 1; i <= 13; i++) {
+      if (document.querySelector('input[name="likert-'+ i.toString() + '"]:checked') === null) {
+        data["likertScales"].push("null");
+      }
+      else {
+        data["likertScales"].push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
+      }
+    }
 
 
     $.ajax({
@@ -284,3 +119,9 @@ $("#form").submit(function(e) {
       });
 
 });
+
+
+function next(sectionId) {
+  $(".section-" + sectionId.toString()).fadeIn();
+  $("#submitButton").fadeIn();
+}

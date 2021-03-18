@@ -24,6 +24,10 @@ input[type=radio], input[type=checkbox] {
   transform: scale(1.6);
 }
 
+input[type=text] {
+  font-size: 0.9rem !important;
+}
+
 .radio-button {
   background: white !important;
   opacity: 1 !important;
@@ -54,7 +58,7 @@ table {
   box-shadow: 5px 5px 10px grey;
 }
 
-.likert { text-align:center; }
+.likert { width: 70%; text-align:center;}
 .likert td { width: 70px; }
 
 .popover{

@@ -19,6 +19,7 @@ let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, <
 router.post("/", function(req, res, next) {
   console.log("Getting post request.");
   console.log(req.body);
+  console.log(req.body["section2"]);
   res.send();
   //res.redirect("/result");
   //next();
