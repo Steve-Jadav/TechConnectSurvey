@@ -58,7 +58,14 @@ $("#form").submit(function(e) {
     data["specialityAreas"] = $("#specialityAreas").val().trim();
     data["companyName"] = $("#companyName").val().trim();
     data["joiningDate"] = $("#joiningDate").val().trim();
-    data["techBridge"] = document.querySelector('input[name="techBridgeRadio"]:checked').value;
+
+    if (document.querySelector('input[name="techBridgeRadio"]:checked') === null) {
+      data["techBridge"] = "null";
+    }
+    else {
+      data["techBridge"] = document.querySelector('input[name="techBridgeRadio"]:checked').value;
+    }
+    
     data["organizationRole"] = [];
     data["noOfPeople"] = $("#noOfPeople").val().trim();
     data["supervisors"] = $("#supervisors").val().trim();
@@ -111,10 +118,8 @@ $("#form").submit(function(e) {
       contentType: 'application/json',
       data: JSON.stringify(data), // access in body
       }).done(function () {
-          console.log('SUCCESS');
           window.location = "/result";
       }).fail(function (msg) {
-          console.log('FAIL');
           return false;
       });
 

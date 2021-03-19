@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const fs = require("fs");
+const getUuid = require("uuid-by-string");
 const databaseOperations = require("./databaseConnection.js");
 const surveyEmailResponseFile = "public/email.html";
 
@@ -17,12 +18,51 @@ let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, <
 "You're invited by xyz to fill out this survey. Here's the <a href='http://localhost:3000/'>link</a> to the survey.</body></html>";
 
 router.post("/", function(req, res, next) {
-  console.log("Getting post request.");
-  console.log(req.body);
-  console.log(req.body["section2"]);
+
+  let likertScales = {
+    "name": getUuid(req.body.firstName + " " + req.body.lastName),
+    "companyName": req.body.companyName,
+    "techBridge": req.body.techBridge,
+    "likertScales": req.body.likertScales,
+  };
+
+  delete req.body.likertScales;
+
+  // Store the responses in a temp json file before loading them into neo4j (safe practice incase the database throws errors and you risk loosing the data)
+  fs.readFile("contacts.json", function (err, data) {
+    if (data == null) {
+      var json = [req.body];
+    }
+    else {
+      json = JSON.parse(data);
+      json.push(req.body);
+    }
+    fs.writeFile("contacts.json", JSON.stringify(json), function(err){
+      if (err) throw err;
+      console.log('The "data to append" was appended to file!');
+    });
+  });
+
+
+  // Store perception scores
+  fs.readFile("perceptionScores.json", function (err, data) {
+    if (data == null) {
+      json = [likertScales];
+    }
+    else {
+      json = JSON.parse(data);
+      json.push(likertScales);
+      json = shuffleArray(json);
+    }
+    fs.writeFile("perceptionScores.json", JSON.stringify(json), function(err){
+      if (err) throw err;
+      console.log('The "data to append" was appended to file!');
+    });
+  });
+
+
   res.send();
-  //res.redirect("/result");
-  //next();
+
   /* Roster insert
   let parentNode = req.body.email;
   let childNode = req.body.email2;
@@ -73,5 +113,17 @@ router.post("/", function(req, res, next) {
   */
 
 });
+
+
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
 module.exports = router;
