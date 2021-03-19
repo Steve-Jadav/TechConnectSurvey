@@ -60,7 +60,7 @@
               </button>
             -->
               <br>
-              <form style="width: 60%;">
+              <form style="width: 100%;" align="left">
 
                 <div class="row">
                     <div class="col-xl-6 col-md-6 mb-4">
@@ -104,13 +104,13 @@
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="techBridgeRadio" id="techBridge" value="True">
                   <label class="form-check-label" for="flexRadioDefault1">
-                    Yes
+                    &nbsp; Yes
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="techBridgeRadio" id="techBridge" value="False">
                   <label class="form-check-label" for="flexRadioDefault2">
-                    No
+                    &nbsp; No
                   </label>
                 </div>
                 <br>
@@ -121,43 +121,43 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Department of Defense (DoD)" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Dept. of Defense (DoD)
+                    &nbsp; Dept. of Defense (DoD)
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Non-DoD Federal Government" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Non-DoD Federal Government
+                    &nbsp; Non-DoD Federal Government
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="State and Local Government" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    State and Local Government
+                    &nbsp; State and Local Government
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Academia" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Academia
+                    &nbsp; Academia
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Private Sector" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Private Sector
+                    &nbsp; Private Sector
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Nonprofit" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Nonprofit
+                    &nbsp; Nonprofit
                   </label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="Other" id="flexCheckDefault">
                   <label class="form-check-label" for="flexCheckDefault">
-                    Other
+                    &nbsp; Other
                   </label>
                 </div>
 
@@ -175,9 +175,9 @@
                 </div>
                 <br>
 
-                <button type="button" class="btn btn-primary btn-sm" id="nextButton" onclick="next(2)">Next Section</button>
-
               </form>
+
+              <button type="button" class="btn btn-primary btn-sm" id="nextButton" onclick="next(2)">Next Section</button>
             </div>
 
           </div>
@@ -201,15 +201,18 @@
                 <p class="text-justify card-text"> In the questions below, you will be asked to detail some of the contacts with whom you work during your day-to-day responsibilities. The term "organization" designates a department (government) or an entire business. </p>
                 <hr>
 
-                <label>
-                   Projects and programs can often involve work with personnel outside of your immediate organization. Please list <b> up to ten (10) </b> people
-                   OUTSIDE of your organization with whom you contact daily for the purposes of pursuing impactful projects or programs for your work.
-                   Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an
-                   introduction or event by your local Tech Bridge.
-                 </label>
-                <br>
-                <br>
+
                 <form id="section-2-form-1">
+
+                    <label>
+                       Projects and programs can often involve work with personnel outside of your immediate organization. Please list <b> up to ten (10) </b> people
+                       OUTSIDE of your organization with whom you contact daily for the purposes of pursuing impactful projects or programs for your work.
+                       Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an
+                       introduction or event by your local Tech Bridge.
+                     </label>
+                    <br>
+                    <br>
+
                     <div class="row">
                       <div class="col-md-3">
                         <input type="text" class="form-control" id="username" placeholder="Full Name">
@@ -231,14 +234,23 @@
                         <button type="button" class="btn btn-primary btn-sm" id="addContact-1" onclick="addContact(1)">Add Contact</button>
                       </div>
                   </div>
+
                 </form>
 
-                <hr>
+                <br>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="dropdown-1" onclick="drop(2)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"></path>
+                  </svg>
+                </button>
 
-                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact weekly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
-                <br>
-                <br>
+
                 <form id="section-2-form-2">
+                  <hr>
+
+                  <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact weekly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                  <br>
+                  <br>
                     <div class="row">
                       <div class="col-md-3">
                         <input type="text" class="form-control" placeholder="Full Name">
@@ -263,12 +275,21 @@
                     </div>
                 </form>
 
-                <hr>
+                <br>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="dropdown-2" onclick="drop(3)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"></path>
+                  </svg>
+                </button>
 
-                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact monthly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
-                <br>
-                <br>
+
                 <form id="section-2-form-3">
+                    <hr>
+
+                    <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you contact monthly for the purposes of pursuing impactful projects or programs for your work. Please make sure to include their organizational affiliation and department. Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                    <br>
+                    <br>
+
                     <div class="row">
                       <div class="col-md-3">
                         <input type="text" class="form-control" placeholder="Full Name">
@@ -293,12 +314,20 @@
                     </div>
                 </form>
 
-                <hr>
+                <br>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="dropdown-3" onclick="drop(4)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"></path>
+                  </svg>
+                </button>
 
-                <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you have contacted in the past 2-12 months for the purposes of pursuing impactful projects or programs for your work. This would generally mean that they are someone you have worked with consistently in the past year but do not have any current work with them. Please make sure to include their organizational affiliation and department.  Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
-                <br>
-                <br>
                 <form id="section-2-form-4">
+                    <hr>
+
+                    <label> Projects and programs can often involve work with personnel outside of your immediate organization. Please list up to ten (10) people OUTSIDE of your organization with whom you have contacted in the past 2-12 months for the purposes of pursuing impactful projects or programs for your work. This would generally mean that they are someone you have worked with consistently in the past year but do not have any current work with them. Please make sure to include their organizational affiliation and department.  Please indicate if this relationship exists because of an introduction or event by your local Tech Bridge. </label>
+                    <br>
+                    <br>
+
                     <div class="row">
 
                       <div class="col-md-3">
@@ -334,6 +363,7 @@
 
          <!-- Section 3 of the survey -->
          <div class="card border-dark section-3" style="width: 60%;">
+
              <div class="card-body">
                <h4 class="card-title"> Perceptions of your local Tech Bridge </h4>
                <br>

@@ -1,17 +1,3 @@
-/*
-button {
-  background: #900C3F !important;
-  border-color: #900C3F !important;
-}
-
-.btn:hover {
-  color: white;
-  opacity: 0.9;
-  FFD800
-  EBF7F4
-}
-*/
-
 body {
   font-family: Tahoma, sans-serif !important;
   font-size: 0.9rem !important;
@@ -58,12 +44,13 @@ table {
   box-shadow: 5px 5px 10px grey;
 }
 
-.likert { width: 70%; text-align:center;}
+.likert { width: 100%; text-align:center;}
 .likert td { width: 70px; }
 
 .popover{
     max-width: 50% !important; /* Max Width of the popover (depending on the container!) */
 }
+
 /*
 input[type=range]::-webkit-slider-thumb {
     background: red;

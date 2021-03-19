@@ -2,6 +2,12 @@
 $(".section-2").hide();
 $(".section-3").hide();
 $("#submitButton").hide();
+$("#section-2-form-2").hide();
+$("#section-2-form-3").hide();
+$("#section-2-form-4").hide();
+$("#dropdown-2").hide();
+$("#dropdown-3").hide();
+$("#dropdown-4").hide();
 
 let contactCounts = [1, 1, 1, 1, 1];
 
@@ -65,7 +71,7 @@ $("#form").submit(function(e) {
     else {
       data["techBridge"] = document.querySelector('input[name="techBridgeRadio"]:checked').value;
     }
-    
+
     data["organizationRole"] = [];
     data["noOfPeople"] = $("#noOfPeople").val().trim();
     data["supervisors"] = $("#supervisors").val().trim();
@@ -129,4 +135,9 @@ $("#form").submit(function(e) {
 function next(sectionId) {
   $(".section-" + sectionId.toString()).fadeIn();
   $("#submitButton").fadeIn();
+}
+
+function drop(formId) {
+  $("#section-2-form-" + formId.toString()).fadeIn();
+  $("#dropdown-" + formId.toString()).fadeIn();
 }
