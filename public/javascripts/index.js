@@ -8,6 +8,7 @@ $("#section-2-form-4").hide();
 $("#dropdown-2").hide();
 $("#dropdown-3").hide();
 $("#dropdown-4").hide();
+$(".button-for-sec3").hide();
 
 let contactCounts = [1, 1, 1, 1, 1];
 
@@ -138,6 +139,9 @@ function next(sectionId) {
 }
 
 function drop(formId) {
+  if (formId === 4) {
+    $(".button-for-sec3").fadeIn();
+  }
   $("#section-2-form-" + formId.toString()).fadeIn();
   $("#dropdown-" + formId.toString()).fadeIn();
 }
