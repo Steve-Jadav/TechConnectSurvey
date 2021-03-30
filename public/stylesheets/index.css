@@ -44,7 +44,7 @@ table {
   box-shadow: 5px 5px 10px grey;
 }
 
-.likert { width: 100%; }
+.likert { width: 100%; text-align: center; }
 .likert td { width: 70px; }
 
 .popover{

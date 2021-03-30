@@ -9,8 +9,10 @@ $("#dropdown-2").hide();
 $("#dropdown-3").hide();
 $("#dropdown-4").hide();
 $(".button-for-sec3").hide();
+$(".likert-questions").hide();
 
 let contactCounts = [1, 1, 1, 1, 1];
+
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -51,6 +53,13 @@ function addContact(index) {
 
 }
 
+$("#techBridge-question-yes").click(function() {
+  $(".likert-questions").fadeIn();
+});
+
+$("#techBridge-question-no").click(function() {
+  $(".likert-questions").fadeOut();
+});
 
 $("#form").submit(function(e) {
 
