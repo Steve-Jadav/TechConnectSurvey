@@ -21,7 +21,7 @@ router.post("/", function(req, res, next) {
 
   let likertScales = {
     "name": getUuid(req.body.firstName + " " + req.body.lastName),
-    "companyName": req.body.companyName,
+    "organizationRole": req.body.organizationRole,
     "techBridge": req.body.techBridge,
     "likertScales": req.body.likertScales,
   };

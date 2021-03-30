@@ -55,11 +55,34 @@ function addContact(index) {
 
 $("#techBridge-question-yes").click(function() {
   $(".likert-questions").fadeIn();
+  let target = $(".section-3");
+  $('html, body').animate({
+    scrollTop: ($(target).offset().top - 20)
+  }, 300);
 });
 
 $("#techBridge-question-no").click(function() {
   $(".likert-questions").fadeOut();
 });
+
+// Used for showing the form (survey section)
+function next(sectionId) {
+  let target = $(".section-" + sectionId.toString());
+  $(".section-" + sectionId.toString()).fadeIn();
+  $('html, body').animate({
+    scrollTop: ($(target).offset().top - 30)
+  }, 500);
+  $("#submitButton").fadeIn();
+}
+
+// Used to dropdown questions from section 2
+function drop(formId) {
+  if (formId === 4) {
+    $(".button-for-sec3").fadeIn();
+  }
+  $("#section-2-form-" + formId.toString()).fadeIn();
+  $("#dropdown-" + formId.toString()).fadeIn();
+}
 
 $("#form").submit(function(e) {
 
@@ -142,15 +165,3 @@ $("#form").submit(function(e) {
 });
 
 
-function next(sectionId) {
-  $(".section-" + sectionId.toString()).fadeIn();
-  $("#submitButton").fadeIn();
-}
-
-function drop(formId) {
-  if (formId === 4) {
-    $(".button-for-sec3").fadeIn();
-  }
-  $("#section-2-form-" + formId.toString()).fadeIn();
-  $("#dropdown-" + formId.toString()).fadeIn();
-}
