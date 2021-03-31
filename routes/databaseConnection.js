@@ -1,3 +1,4 @@
+const getUuid = require("uuid-by-string");
 const neo4j = require("neo4j-driver");
 const CONNECTION_URI = "bolt://localhost:7687";
 const credentials = {
@@ -84,47 +85,57 @@ async function fetchRecords(cypher) {
 
 /**
 * @param {String} parentNode
-* @param {String} childNode
-* @param {String} relationshipType
+* @param {String} childNodes
 */
-async function rosterInsert(parentNode, childNode, relationshipType) {
+async function rosterInsert(parentNode, childNodes) {
   let flag = Boolean(false);
 
   try {
-    // First check if the root node already exists in the database.
-    let match = "MATCH (n: Researcher { email: $email }) RETURN n";
+    // First check if the root node already exists in the database using the nodeId.
+    let match = "MATCH (n) WHERE n.nodeId = '" + parentNode.nodeId + "' RETURN n";
     console.log(match);
-    let present = await session.run(match, { email: parentNode });
+    let present = await session.run(match);
     console.log(present);
+    // Create the parent node if it doesn't exist.
     if (present.records.length == 0) {
-      let cypher = "CREATE (n: Researcher { name: $name, title: $title, email: $email }) RETURN n";
-
+      let cypher = "CREATE (n: " + parentNode.jobTitle + " { firstname: $firstname, lastname: $lastname, jobTitle: $jobTitle, specialityAreas: $specialityAreas, companyName: $companyName, joiningDate: $joiningDate, organizationRole: $organizationRole, noOfPeople: $noOfPeople }) RETURN n";
       let result = await session.run(
         cypher,
-        { name: "Ralph", title: parentNode, email: parentNode }
+        { firstname: parentNode.firstName, lastname: parentNode.lastName, jobTitle: parentNode.jobTitle, 
+          specialityAreas: parentNode.specialityAreas, companyName: parentNode.companyName, joiningDate: parentNode.joiningDate,
+          organizationRole: parentNode.organizationRole, noOfPeople: parentNode.noOfPeople }
       );
       console.log("Created the parent node!");
     }
 
-    // Check if the child node exists in the database
-    match = "MATCH (n: ServiceProvider { email: $email }) RETURN n";
-    present = await session.run(match, { email: childNode });
+    // Check if the supervisor nodes exist in the database. If False, then add them to the graph with relationship = 'supervisor'
+    let supervisors = childNodes.supervisors.split(",").map(x => x.trim());
+    for (var i = 0; i < supervisors.length; i++) {
+      let id = getUuid(supervisors[i]);
+      match = "MATCH (n) WHERE n.nodeId = '" + id + "' RETURN n";
+      present = await session.run(match);
 
-    if (present.records.length == 0) {
-      cypher = "CREATE (n: ServiceProvider { name: $name, title: $title, email: $email }) RETURN n";
+      if (present.records.length == 0) {
+        cypher = "CREATE (n: Supervisor { name: $name, nodeId: $nodeId }) RETURN n";
 
-      result = await session.run(
-        cypher,
-        { name: "Steve", title: childNode, email: childNode }
-      );
-      console.log("Created the parent node!");
+        result = await session.run(
+          cypher,
+          { name: supervisors[i], nodeId: id }
+        );
+        console.log("Created the supervisor node!");
+      }
+
+      // Connect both the nodes (parent and supervisor)
+      let relationshipCypher = "MATCH (a), (b: Supervisor) WHERE a.nodeId='" + parentNode.nodeId + "' AND b.nodeId='" + id + "' CREATE (a)-[r:HAS_SUPERVISOR { type: $type } ]->(b) RETURN type(r)";
+      result = await session.run(relationshipCypher, { type: "supervisor" });
+
     }
 
-      // Connect both the nodes
-      let relationshipCypher = "MATCH (a: Researcher), (b: ServiceProvider) WHERE a.name='Ralph' AND b.name='Steve' CREATE (a)-[r:WORKSWITH { type: $type } ]->(b) RETURN type(r)";
-      result = await session.run(relationshipCypher, { type: relationshipType });
-      flag = Boolean(true);
-    }
+    // Check if the contact nodes exist in the database. If False, then add them to the graph.
+
+    
+    flag = Boolean(true);
+  }
 
   finally {
     return flag;

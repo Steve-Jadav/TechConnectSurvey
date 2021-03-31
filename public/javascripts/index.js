@@ -11,10 +11,9 @@ $("#dropdown-4").hide();
 $(".button-for-sec3").hide();
 $(".likert-questions").hide();
 
-let contactCounts = [1, 1, 1, 1, 1];
+var contactCounts = [1, 1, 1, 1, 1];
 
-
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
   return new bootstrap.Popover(popoverTriggerEl)
 });
@@ -98,12 +97,14 @@ $("#form").submit(function(e) {
     data["companyName"] = $("#companyName").val().trim();
     data["joiningDate"] = $("#joiningDate").val().trim();
 
+    /*
     if (document.querySelector('input[name="techBridgeRadio"]:checked') === null) {
       data["techBridge"] = "null";
     }
     else {
       data["techBridge"] = document.querySelector('input[name="techBridgeRadio"]:checked').value;
     }
+    */
 
     data["organizationRole"] = [];
     data["noOfPeople"] = $("#noOfPeople").val().trim();
@@ -132,7 +133,13 @@ $("#form").submit(function(e) {
           let org = formElements[l + 1].value.trim();
           let relationship = formElements[l + 2].value.trim();
           if (relationship === "Choose Relationship Type...") { relationship = ""; }
+          
           let packet = { "name": name, "org": org, "relationship": relationship };
+          if (formId == 1) packet["contactFrequency"] = "daily";
+          if (formId == 2) packet["contactFrequency"] = "weekly";
+          if (formId == 3) packet["contactFrequency"] = "monthly";
+          if (formId == 4) packet["contactFrequency"] = "past 2-12 months";
+
           data["section2"]["q" + formId.toString()].push(packet);
           l += 3;
       }

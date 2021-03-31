@@ -19,13 +19,13 @@ let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, <
 
 router.post("/", function(req, res, next) {
 
+  req.body["nodeId"] = getUuid(req.body.firstName + " " + req.body.lastName);
   let likertScales = {
-    "name": getUuid(req.body.firstName + " " + req.body.lastName),
     "organizationRole": req.body.organizationRole,
-    "techBridge": req.body.techBridge,
     "likertScales": req.body.likertScales,
   };
 
+  // De-associate likert scales from section-1 and section-2
   delete req.body.likertScales;
 
   // Store the responses in a temp json file before loading them into neo4j (safe practice incase the database throws errors and you risk loosing the data)
@@ -39,12 +39,11 @@ router.post("/", function(req, res, next) {
     }
     fs.writeFile("contacts.json", JSON.stringify(json), function(err){
       if (err) throw err;
-      console.log('The "data to append" was appended to file!');
     });
   });
 
 
-  // Store perception scores
+  // Store the perception scores in a separate file
   fs.readFile("perceptionScores.json", function (err, data) {
     if (data == null) {
       json = [likertScales];
@@ -52,30 +51,33 @@ router.post("/", function(req, res, next) {
     else {
       json = JSON.parse(data);
       json.push(likertScales);
-      json = shuffleArray(json);
+      json = shuffleArray(json);  // Shuffle the array so that it cannot be compared side-by-side with the contacts.json file.
     }
     fs.writeFile("perceptionScores.json", JSON.stringify(json), function(err){
       if (err) throw err;
-      console.log('The "data to append" was appended to file!');
     });
   });
 
-
   res.send();
 
-  /* Roster insert
-  let parentNode = req.body.email;
-  let childNode = req.body.email2;
-  let relationship = req.body.relationship;
+  /* Roster insert */
 
-  databaseOperations.rosterInsert(parentNode, childNode, relationship)
+  // Collect the child nodes (the people mentioned as contacts)
+  let childNodes = req.body.section2;
+  childNodes["supervisors"] = req.body.supervisors;
+  delete req.body.section2;
+
+  // Collect the parent Node (the person who took the survey)
+  let parentNode = req.body;
+
+  databaseOperations.rosterInsert(parentNode, childNodes)
                     .then(result => {
                       if (result === true) console.log("Connection created successfully!");
                       else console.log("An error occured while inserting records to Neo4j.");
                     })
                     .catch(error => {
                       console.log(error);
-                    }); */
+                    }); 
 
   /*
   let rootNode = req.body.email;
