@@ -1,16 +1,27 @@
-// Hide section-2 and section-3 on document load
+// Hide some elements on document load
 $(".section-2").hide();
 $(".section-3").hide();
 $("#submitButton").hide();
 $("#section-2-form-2").hide();
 $("#section-2-form-3").hide();
 $("#section-2-form-4").hide();
+
+// Hide dropdown buttons (i.e. Next Question buttons)
 $("#dropdown-2").hide();
 $("#dropdown-3").hide();
 $("#dropdown-4").hide();
+
+// Next Section button for showing section 3
 $(".button-for-sec3").hide();
+
+// Show likert questions only if the user has had worked with TechBridge
 $(".likert-questions").hide();
 
+// Hide the feedback section initially
+$(".section-4").hide();
+
+// Used to keep track of number of contacts allowed to be added in section 2
+// Each question has a cap of 10 contacts 
 var contactCounts = [1, 1, 1, 1, 1];
 
 var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
@@ -19,9 +30,11 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 });
 
 
+/*
 function updateTextInput(val, index) {
     $(".badge-" + index.toString()).text(val);
 }
+*/
 
 function addContact(index) {
 
@@ -37,7 +50,7 @@ function addContact(index) {
           "<select id='inputState' class='form-control'>" +
             "<option selected>Choose Relationship Type...</option>" +
             "<option>External Industry Group</option>" +
-            "<option>Within Industry Group</option>" +
+            "<option>I met this person because of NW TechBridge</option>" +
           "</select>" +
       "</div>" +
     "</div>";
@@ -66,6 +79,9 @@ $("#techBridge-question-no").click(function() {
 
 // Used for showing the form (survey section)
 function next(sectionId) {
+  if (sectionId == 3) {
+    $(".section-4").fadeIn();
+  }
   let target = $(".section-" + sectionId.toString());
   $(".section-" + sectionId.toString()).fadeIn();
   $('html, body').animate({
@@ -157,6 +173,7 @@ $("#form").submit(function(e) {
       }
     }
 
+    data["feedback"] = $("#feedback").val().trim();
 
     $.ajax({
       type: 'POST',

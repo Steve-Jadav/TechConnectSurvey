@@ -24,9 +24,13 @@ router.post("/", function(req, res, next) {
     "organizationRole": req.body.organizationRole,
     "likertScales": req.body.likertScales,
   };
+  let feedback = { "feedback": req.body.feedback };
 
   // De-associate likert scales from section-1 and section-2
   delete req.body.likertScales;
+
+  // De-associate feedback from the survey to keep it anonymous
+  delete req.body.feedback;
 
   // Store the responses in a temp json file before loading them into neo4j (safe practice incase the database throws errors and you risk loosing the data)
   fs.readFile("contacts.json", function (err, data) {
@@ -42,7 +46,6 @@ router.post("/", function(req, res, next) {
     });
   });
 
-
   // Store the perception scores in a separate file
   fs.readFile("perceptionScores.json", function (err, data) {
     if (data == null) {
@@ -54,6 +57,21 @@ router.post("/", function(req, res, next) {
       json = shuffleArray(json);  // Shuffle the array so that it cannot be compared side-by-side with the contacts.json file.
     }
     fs.writeFile("perceptionScores.json", JSON.stringify(json), function(err){
+      if (err) throw err;
+    });
+  });
+
+  // Store the feedback in a separate file
+  fs.readFile("feedback.json", function (err, data) {
+    if (data == null) {
+      json = [feedback];
+    }
+    else {
+      json = JSON.parse(data);
+      json.push(feedback);
+      json = shuffleArray(json);  // Shuffle the array so that it cannot be compared side-by-side with the contacts.json file.
+    }
+    fs.writeFile("feedback.json", JSON.stringify(json), function(err){
       if (err) throw err;
     });
   });

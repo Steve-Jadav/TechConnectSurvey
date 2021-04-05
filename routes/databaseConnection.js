@@ -91,21 +91,29 @@ async function rosterInsert(parentNode, childNodes) {
   let flag = Boolean(false);
 
   try {
-    // First check if the root node already exists in the database using the nodeId.
+    // First check if the parent node already exists in the database using the nodeId.
     let match = "MATCH (n) WHERE n.nodeId = '" + parentNode.nodeId + "' RETURN n";
     console.log(match);
+    
     let present = await session.run(match);
     console.log(present);
+    
+    let properties =  { firstname: parentNode.firstName, lastname: parentNode.lastName, jobTitle: parentNode.jobTitle, 
+      specialityAreas: parentNode.specialityAreas, companyName: parentNode.companyName, joiningDate: parentNode.joiningDate,
+      organizationRole: parentNode.organizationRole, noOfPeople: parentNode.noOfPeople };
+
     // Create the parent node if it doesn't exist.
     if (present.records.length == 0) {
       let cypher = "CREATE (n: " + parentNode.jobTitle + " { firstname: $firstname, lastname: $lastname, jobTitle: $jobTitle, specialityAreas: $specialityAreas, companyName: $companyName, joiningDate: $joiningDate, organizationRole: $organizationRole, noOfPeople: $noOfPeople }) RETURN n";
-      let result = await session.run(
-        cypher,
-        { firstname: parentNode.firstName, lastname: parentNode.lastName, jobTitle: parentNode.jobTitle, 
-          specialityAreas: parentNode.specialityAreas, companyName: parentNode.companyName, joiningDate: parentNode.joiningDate,
-          organizationRole: parentNode.organizationRole, noOfPeople: parentNode.noOfPeople }
-      );
+      let result = await session.run( cypher, properties );
       console.log("Created the parent node!");
+    }
+    // If it exists, it exists as a 'Supervisor' node. Verify the node attributes. If some of them are missing try to update them.
+    else {
+      // Check if it exists as a 'Supervisor' node. In that case, add new properties to the node.
+      cypher = "MATCH (n: Supervisor {nodeId: $nodeId}) SET n.firstname = $firstname, n.lastname = $lastname, n.jobTitle = $jobTitle, n.specialityAreas = $specialityAreas, n.companyName = $companyName, n.joiningDate = $joiningDate, n.organizationRole = $organizationRole, n.noOfPeople = $noOfPeople";
+      result = await session.run( cypher, properties );
+      console.log("Updated the properties of a supervisor node.");
     }
 
     // Check if the supervisor nodes exist in the database. If False, then add them to the graph with relationship = 'supervisor'
@@ -132,7 +140,32 @@ async function rosterInsert(parentNode, childNodes) {
     }
 
     // Check if the contact nodes exist in the database. If False, then add them to the graph.
+    for (const [key, value] of Object.entries(childNodes.section2)) {
+      let contacts = childNodes.section2.key;
+      for (var i = 0; i < contacts.length; i++) {
+        let contact = contacts[i];
+        if (contact.name == "" && contact.org == "" && contact.relationship == "")
+          continue;
+        id = getUuid(contact.name);
+        match = "MATCH (n) WHERE n.nodeId = '" + id + "' RETURN n";
+        present = await session.run(match);
 
+        if (present.records.length == 0) {
+          cypher = "CREATE (n: ContactNode { name: $name, nodeId; $nodeId, organization: $organization }) RETURN n";
+          result = await session.run(
+            cyper,
+            { name: contact.name, nodeId: id, organization: contact.org }
+          );
+          console.log("Created the contact node");
+          
+          // Connect both the nodes (parent and supervisor)
+          let relationshipCypher = "MATCH (a), (b: ContactNode) WHERE a.nodeId='" + parentNode.nodeId + "' AND b.nodeId='" + id + "' CREATE (a)-[r:CONTACTS_" + contact.contactFrequency.toUpperCase() + " { type: $type } ]->(b) RETURN type(r)";
+          result = await session.run(relationshipCypher, { type: "contact" });
+
+        }
+
+      }
+    }
     
     flag = Boolean(true);
   }

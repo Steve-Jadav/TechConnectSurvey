@@ -14,6 +14,10 @@ input[type=text] {
   font-size: 0.9rem !important;
 }
 
+textarea {
+  font-size: 0.9rem !important;
+}
+
 .radio-button {
   background: white !important;
   opacity: 1 !important;
