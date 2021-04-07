@@ -65,17 +65,18 @@
 
                 <div class="row">
                     <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                      </div>
                     </div>
-                  </div>
 
                     <div class="col-xl-6 col-md-6 mb-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                      </div>
                     </div>
-                  </div>
                 </div>
+
                 <div class="form-group">
                   <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
                 </div>
@@ -922,10 +923,56 @@
         </div>
 
         <br>
+        <br>
+
+        <div class="card border-dark section-5" style="width: 60%;">
+            <div class="card-body" align="left">
+                <label> Would you like us to contact you to ask additional questions pertaining to your work with the Northwest Tech Bridge and/or your local partners? </label>
+                <br>
+                <br>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="futurecontact" id="futurecontact-question-yes" value="True">
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    &nbsp; Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="futurecontact" id="futurecontact-question-no" value="False">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    &nbsp; No
+                  </label>
+                </div>
+
+                <br>
+
+                <div class="contact-details">
+                  <label> In what way would you prefer to be contacted? Please provide one of the below details. </label>
+                  <br>
+                  <div class="row">
+                      <div class="col-xl-6 col-md-6 mb-4">
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="contact-email" placeholder="Email ID">
+                        </div>
+                      </div>
+
+                      <div class="col-xl-6 col-md-6 mb-4">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="contact-phone" placeholder="Phone Number">
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                
+            </div> <!-- End of card body -->
+        </div> <!-- End of card section-5 -->
+
+        <!-- End of survey -->
+        <br>
 
         <form id="form" onclick="return confirm('Are you sure you want to submit this survey?');">
           <button type="submit" class="btn btn-primary btn-sm" id="submitButton">Submit</button>
-       </form>
+        </form>
         <br>
         <br>
 

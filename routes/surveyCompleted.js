@@ -78,6 +78,7 @@ router.post("/", function(req, res, next) {
 
   res.send();
 
+
   /* Roster insert 
 
   // Collect the child nodes (the people mentioned as contacts)
@@ -96,7 +97,9 @@ router.post("/", function(req, res, next) {
                     .catch(error => {
                       console.log(error);
                     }); 
+
   */
+  
   /*
   let rootNode = req.body.email;
   let childNodes = new Array(req.body.email2, req.body.email3);

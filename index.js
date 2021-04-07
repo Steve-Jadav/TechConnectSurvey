@@ -40,6 +40,16 @@ app.get("/result", function(req, res) {
 
 });
 
+/*
+app.get("/ecosystem", function(req, res) {
+  fs.readFile('public/ecosystem.html',function (err, data){
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    res.send();
+  });
+});
+*/
+
 app.use("/surveyCompleted", surveyCompletedRouter);
 
 app.listen(PORT, () => {

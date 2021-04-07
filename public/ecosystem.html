@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible">
+        <title>TechBridge Ecosystem Map</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../stylesheets/index.css">
+        <script src="https://rawgit.com/neo4j-contrib/neovis.js/master/dist/neovis.js"></script>
+    </head>
+
+    <script>
+            function draw() {
+                var config = {
+                    container_id: "network",
+                    server_url: "bolt://localhost:7687",
+                    server_user: "neo4j",
+                    server_password: "neo4j_1234",
+                    arrows: true,
+                    labels: {
+                        "Funder": {
+                            caption: "name",
+                            size: 0.1,
+                            "font": {
+                                "size":10,
+                                "color":"#000000"
+                            }
+                        },
+                        "Researcher": {
+                            caption: "name",
+                            size: 0.1,
+                            "font": {
+                                "size":10,
+                                "color":"#000000"
+                            }
+                        },
+                        "ServiceProvider": {
+                            size: 0.1,
+                            "font": {
+                                "size":10,
+                                "color":"#000000"
+                            }
+                        }
+                    }, 
+                    relationships: {
+                        "CONTACTS": {
+                            caption: true,
+                            thickness: "1"
+                        },
+                        "SUPERVISES": {
+                            caption: true,
+                            thickness: "100"
+                        }
+
+                    }, 
+                    initial_cypher: "Match (n)-[r]->(m) Return n,r,m"
+                }
+
+                var viz = new NeoVis.default(config);
+                viz.render();
+            }
+        </script>
+
+    <body onload="draw()" style="background: white !important;">
+        <div id="network"></div>
+    </body>
+</html>

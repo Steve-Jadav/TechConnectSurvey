@@ -5,6 +5,8 @@ $("#submitButton").hide();
 $("#section-2-form-2").hide();
 $("#section-2-form-3").hide();
 $("#section-2-form-4").hide();
+$(".section-5").hide();
+$(".contact-details").hide();
 
 // Hide dropdown buttons (i.e. Next Question buttons)
 $("#dropdown-2").hide();
@@ -77,10 +79,19 @@ $("#techBridge-question-no").click(function() {
   $(".likert-questions").fadeOut();
 });
 
+$("#futurecontact-question-yes").click(function() {
+  $(".contact-details").fadeIn();
+});
+
+$("#futurecontact-question-no").click(function() {
+  $(".contact-details").hide();
+});
+
 // Used for showing the form (survey section)
 function next(sectionId) {
   if (sectionId == 3) {
     $(".section-4").fadeIn();
+    $(".section-5").fadeIn();
   }
   let target = $(".section-" + sectionId.toString());
   $(".section-" + sectionId.toString()).fadeIn();
@@ -133,7 +144,7 @@ $("#form").submit(function(e) {
     };
     data["likertScales"] = new Array();
 
-    // Fetch checkbox checked values
+    // Fetch checkbox checked values. data["likertScales"] will be an empty list if no option is selected
     let checkedValues = $('input[type="checkbox"]:checked');
     for (var i = 0; i < checkedValues.length; i++) {
       data["organizationRole"].push(checkedValues[i].value);
@@ -145,10 +156,16 @@ $("#form").submit(function(e) {
       let l = 0;
       while (l < formElements.length) {
           if (l == 3) { l += 1; continue; }
+
           let name = formElements[l].value.trim();
           let org = formElements[l + 1].value.trim();
           let relationship = formElements[l + 2].value.trim();
           if (relationship === "Choose Relationship Type...") { relationship = ""; }
+          
+          if (name == "" && org == "" && relationship == "") {
+            l += 3;
+            continue;
+          }
           
           let packet = { "name": name, "org": org, "relationship": relationship };
           if (formId == 1) packet["contactFrequency"] = "daily";
@@ -163,7 +180,7 @@ $("#form").submit(function(e) {
     }
 
 
-    // Fetch the likert scale questions (section 3)
+    // Fetch the likert scale responses (section 3)
     for (let i = 1; i <= 13; i++) {
       if (document.querySelector('input[name="likert-'+ i.toString() + '"]:checked') === null) {
         data["likertScales"].push("null");
@@ -173,7 +190,19 @@ $("#form").submit(function(e) {
       }
     }
 
+    // Fetch the feedback
     data["feedback"] = $("#feedback").val().trim();
+
+    // Fetch contact details if available
+    if (document.querySelector('input[name="futurecontact"]:checked') === null) {
+      data["contact"] = "False";
+    }
+    else {
+      data["contact"] = document.querySelector('input[name="futurecontact"]:checked').value;
+    }
+
+    data["phone"] = $("#contact-phone").val().trim();
+    data["email"] = $("#contact-email").val().trim();
 
     $.ajax({
       type: 'POST',

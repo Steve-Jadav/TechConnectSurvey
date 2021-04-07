@@ -55,6 +55,12 @@ table {
     max-width: 50% !important; /* Max Width of the popover (depending on the container!) */
 }
 
+#network {
+  width: 100% !important;
+  height: 100vh !important;
+  border: 1px solid lightgray !important;
+  font: 22pt arial !important;
+}
 /*
 input[type=range]::-webkit-slider-thumb {
     background: red;
