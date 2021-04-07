@@ -166,7 +166,7 @@ $("#form").submit(function(e) {
             l += 3;
             continue;
           }
-          
+
           let packet = { "name": name, "org": org, "relationship": relationship };
           if (formId == 1) packet["contactFrequency"] = "daily";
           if (formId == 2) packet["contactFrequency"] = "weekly";
@@ -181,12 +181,12 @@ $("#form").submit(function(e) {
 
 
     // Fetch the likert scale responses (section 3)
-    for (let i = 1; i <= 13; i++) {
-      if (document.querySelector('input[name="likert-'+ i.toString() + '"]:checked') === null) {
-        data["likertScales"].push("null");
-      }
-      else {
-        data["likertScales"].push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
+    if (document.querySelector('input[name="tb"]:checked').value == "True") {
+      for (let i = 1; i <= 13; i++) {
+        if (document.querySelector('input[name="likert-'+ i.toString() + '"]:checked') === null) 
+          data["likertScales"].push("null");
+        else 
+          data["likertScales"].push(document.querySelector('input[name="likert-'+ i.toString() + '"]:checked').value);
       }
     }
 

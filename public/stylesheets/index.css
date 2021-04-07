@@ -10,7 +10,7 @@ input[type=radio], input[type=checkbox] {
   transform: scale(1.6);
 }
 
-input[type=text] {
+input[type=text], input[type=email] {
   font-size: 0.9rem !important;
 }
 

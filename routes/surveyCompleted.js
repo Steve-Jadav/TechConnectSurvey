@@ -5,21 +5,24 @@ const fs = require("fs");
 const getUuid = require("uuid-by-string");
 const databaseOperations = require("./databaseConnection.js");
 const surveyEmailResponseFile = "public/email.html";
+const randomString = require("randomstring");
 
+/*
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "stevejadav1998@gmail.com",
     pass: "***"
   }
-});
+}); 
 
 let htmlEmailMessage = "<html><body style='background: black;'><p>Hello there, </p> </br>" +
 "You're invited by xyz to fill out this survey. Here's the <a href='http://localhost:3000/'>link</a> to the survey.</body></html>";
+*/
 
 router.post("/", function(req, res, next) {
 
-  req.body["nodeId"] = getUuid(req.body.firstName + " " + req.body.lastName);
+  req.body["nodeId"] = getUuid(req.body.firstName + req.body.lastName + randomString.generate(2));
   let likertScales = {
     "organizationRole": req.body.organizationRole,
     "likertScales": req.body.likertScales,
@@ -33,7 +36,7 @@ router.post("/", function(req, res, next) {
   delete req.body.feedback;
 
   // Store the responses in a temp json file before loading them into neo4j (safe practice incase the database throws errors and you risk loosing the data)
-  fs.readFile("contacts.json", function (err, data) {
+  fs.readFile("data/contacts.json", function (err, data) {
     if (data == null) {
       var json = [req.body];
     }
@@ -41,13 +44,13 @@ router.post("/", function(req, res, next) {
       json = JSON.parse(data);
       json.push(req.body);
     }
-    fs.writeFile("contacts.json", JSON.stringify(json), function(err){
+    fs.writeFile("data/contacts.json", JSON.stringify(json), function(err){
       if (err) throw err;
     });
   });
 
   // Store the perception scores in a separate file
-  fs.readFile("perceptionScores.json", function (err, data) {
+  fs.readFile("data/perceptionScores.json", function (err, data) {
     if (data == null) {
       json = [likertScales];
     }
@@ -56,13 +59,13 @@ router.post("/", function(req, res, next) {
       json.push(likertScales);
       json = shuffleArray(json);  // Shuffle the array so that it cannot be compared side-by-side with the contacts.json file.
     }
-    fs.writeFile("perceptionScores.json", JSON.stringify(json), function(err){
+    fs.writeFile("data/perceptionScores.json", JSON.stringify(json), function(err){
       if (err) throw err;
     });
   });
 
   // Store the feedback in a separate file
-  fs.readFile("feedback.json", function (err, data) {
+  fs.readFile("data/feedback.json", function (err, data) {
     if (data == null) {
       json = [feedback];
     }
@@ -71,7 +74,7 @@ router.post("/", function(req, res, next) {
       json.push(feedback);
       json = shuffleArray(json);  // Shuffle the array so that it cannot be compared side-by-side with the contacts.json file.
     }
-    fs.writeFile("feedback.json", JSON.stringify(json), function(err){
+    fs.writeFile("data/feedback.json", JSON.stringify(json), function(err){
       if (err) throw err;
     });
   });
